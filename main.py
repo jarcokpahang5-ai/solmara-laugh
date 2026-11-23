@@ -15,9 +15,10 @@ LINE = (
 
 OUTPUT_PATH = "/output/entry.txt"
 
-# A sentence terminator only counts as a sentence break when followed by a
-# space or the end of the string.
-_SENTENCE_END = re.compile(r"[.!?](?=\s|$)")
+# A sentence terminator only counts as a sentence break when followed by
+# optional closing quotes, then a space or the end of the string — so a
+# period before a closing quote still ends the sentence.
+_SENTENCE_END = re.compile(r"[.!?]['\"”’)]*(?=\s|$)")
 
 
 def validate_line(line: str) -> str:
